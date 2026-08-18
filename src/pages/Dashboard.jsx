@@ -28,11 +28,13 @@ import {
   Grid2X2,
 } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
+import AgentCard from "../components/agents/AgentCard";
+import AgentGrid from '../components/agents/AgentGrid'
 
 const sidebarItems = [
   { label: 'Home', icon: Home, path: '/' },
   { label: 'Trending', icon: TrendingUp, path: '#' },
-  { label: 'Agents', icon: Bot, path: '#' },
+  { label: 'Agents', icon: Bot, path: '/agents' },
   { label: 'Categories', icon: Layers, path: '#' },
   { label: 'AI Trends', icon: Compass, path: '#' },
   { label: 'News', icon: Newspaper, path: '#' },
@@ -43,32 +45,32 @@ const sidebarItems = [
   { label: 'Settings', icon: Settings, path: '#' },
 ]
 
-const recommendedAgents = [
-  {
-    name: 'CodeGPT',
-    description: 'AI Coding Agent',
-    rating: '4.8',
-    users: '10.2K',
-    category: 'Coding',
-    icon: '💻',
-  },
-  {
-    name: 'ResearchAI',
-    description: 'AI Research Assistant',
-    rating: '4.9',
-    users: '6.3K',
-    category: 'Research',
-    icon: '🧠',
-  },
-  {
-    name: 'VideoMind',
-    description: 'AI Video Editor',
-    rating: '4.7',
-    users: '8.7K',
-    category: 'Video',
-    icon: '🎬',
-  },
-]
+// const recommendedAgents = [
+//   {
+//     name: 'CodeGPT',
+//     description: 'AI Coding Agent',
+//     rating: '4.8',
+//     users: '10.2K',
+//     category: 'Coding',
+//     icon: '💻',
+//   },
+//   {
+//     name: 'ResearchAI',
+//     description: 'AI Research Assistant',
+//     rating: '4.9',
+//     users: '6.3K',
+//     category: 'Research',
+//     icon: '🧠',
+//   },
+//   {
+//     name: 'VideoMind',
+//     description: 'AI Video Editor',
+//     rating: '4.7',
+//     users: '8.7K',
+//     category: 'Video',
+//     icon: '🎬',
+//   },
+// ]
 
 const trends = [
   {
@@ -100,11 +102,10 @@ export default function Dashboard() {
   }
 
   const displayName =
-    user?.user_metadata?.full_name ||
-    user?.user_metadata?.fullName ||
-    user?.email?.split('@')[0] ||
+    user?.user_metadata?.username ||
     'User'
 
+    console.log(user)
   return (
     <div className="min-h-screen bg-[#070b14] text-white">
 
@@ -309,7 +310,7 @@ export default function Dashboard() {
                 <div className="mt-6 flex flex-wrap gap-3">
 
                   <Link
-                    to="/"
+                    to="/agents"
                     className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-purple-600 to-blue-600 px-5 py-3 text-sm font-semibold transition hover:scale-[1.02]"
                   >
                     Explore Agents
@@ -422,10 +423,9 @@ export default function Dashboard() {
 
             <SectionHeader
               title="Recommended for You"
-              linkText="View all"
             />
 
-            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            {/* <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
 
               {recommendedAgents.map((agent) => (
                 <AgentCard
@@ -434,7 +434,8 @@ export default function Dashboard() {
                 />
               ))}
 
-            </div>
+            </div> */}
+            <AgentGrid />
 
           </section>
 
@@ -686,58 +687,58 @@ function QuickAction({
 /* AGENT CARD                        */
 /* ================================= */
 
-function AgentCard({ agent }) {
-  return (
-    <div className="group rounded-2xl border border-white/10 bg-[#0d1421] p-5 transition hover:-translate-y-1 hover:border-purple-500/30">
+// function AgentCard({ agent }) {
+//   return (
+//     <div className="group rounded-2xl border border-white/10 bg-[#0d1421] p-5 transition hover:-translate-y-1 hover:border-purple-500/30">
 
-      <div className="flex items-start justify-between">
+//       <div className="flex items-start justify-between">
 
-        <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-purple-500/10 text-2xl">
-          {agent.icon}
-        </div>
+//         <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-purple-500/10 text-2xl">
+//           {agent.icon}
+//         </div>
 
-        <button className="rounded-lg p-2 text-slate-600 transition hover:bg-white/5 hover:text-white">
-          <Bookmark size={17} />
-        </button>
+//         <button className="rounded-lg p-2 text-slate-600 transition hover:bg-white/5 hover:text-white">
+//           <Bookmark size={17} />
+//         </button>
 
-      </div>
+//       </div>
 
-      <div className="mt-5">
+//       <div className="mt-5">
 
-        <div className="flex items-center justify-between">
+//         <div className="flex items-center justify-between">
 
-          <h3 className="font-semibold group-hover:text-purple-300">
-            {agent.name}
-          </h3>
+//           <h3 className="font-semibold group-hover:text-purple-300">
+//             {agent.name}
+//           </h3>
 
-          <span className="rounded-full bg-white/5 px-2 py-1 text-[10px] text-slate-500">
-            {agent.category}
-          </span>
+//           <span className="rounded-full bg-white/5 px-2 py-1 text-[10px] text-slate-500">
+//             {agent.category}
+//           </span>
 
-        </div>
+//         </div>
 
-        <p className="mt-1 text-xs text-slate-500">
-          {agent.description}
-        </p>
+//         <p className="mt-1 text-xs text-slate-500">
+//           {agent.description}
+//         </p>
 
-      </div>
+//       </div>
 
-      <div className="mt-5 flex items-center gap-4 text-xs">
+//       <div className="mt-5 flex items-center gap-4 text-xs">
 
-        <span className="flex items-center gap-1 text-yellow-400">
-          <Star size={13} fill="currentColor" />
-          {agent.rating}
-        </span>
+//         <span className="flex items-center gap-1 text-yellow-400">
+//           <Star size={13} fill="currentColor" />
+//           {agent.rating}
+//         </span>
 
-        <span className="text-slate-500">
-          {agent.users} users
-        </span>
+//         <span className="text-slate-500">
+//           {agent.users} users
+//         </span>
 
-      </div>
+//       </div>
 
-    </div>
-  )
-}
+//     </div>
+//   )
+// }
 
 
 /* ================================= */
