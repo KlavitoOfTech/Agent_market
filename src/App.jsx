@@ -8,7 +8,8 @@ import './index.css';
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { AuthProvider } from './context/AuthContext.jsx'
-
+import Agents from './pages/Agents'
+import AgentDetails from './pages/AgentDetails'
 
 function App() {
   return (
@@ -18,6 +19,11 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/agents" element={<Agents />} />
+        <Route
+          path="/agents/:id"
+          element={<AgentDetails />}
+        />
       </Routes>
     </BrowserRouter>
   )
