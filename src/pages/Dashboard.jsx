@@ -29,7 +29,12 @@ import {
 } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 import AgentCard from "../components/agents/AgentCard";
-import AgentGrid from '../components/agents/AgentGrid'
+import AgentGrid from '../components/agents/AgentGrid';
+import TrendingAgents from '../components/dashboard/TrendingAgents';
+import MostPopular from '../components/dashboard/MostPopular';
+import NewReleases from '../components/dashboard/NewReleases';
+import AITrends from '../components/dashboard/AITrends';
+import RisingCategories from '../components/dashboard/RisingCategories'
 
 const sidebarItems = [
   { label: 'Home', icon: Home, path: '/' },
@@ -419,13 +424,13 @@ export default function Dashboard() {
           </section>
 
           {/* Recommended */}
-          <section className="mt-10">
+          {/* <section className="mt-10">
 
             <SectionHeader
               title="Recommended for You"
             />
 
-            {/* <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
 
               {recommendedAgents.map((agent) => (
                 <AgentCard
@@ -434,10 +439,15 @@ export default function Dashboard() {
                 />
               ))}
 
-            </div> */}
+            </div>
             <AgentGrid />
 
-          </section>
+          </section> */}
+          <TrendingAgents />
+          <MostPopular />
+          <NewReleases />
+          <AITrends />
+          <RisingCategories />
 
           {/* Trends */}
           <section className="mt-10">
