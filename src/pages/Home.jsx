@@ -108,8 +108,8 @@ const sidebarItems = [
   { label: 'Saved', icon: Bookmark },
   { label: 'Collections', icon: Heart },
   { label: 'Community', icon: Users },
-  { label: 'Profile', icon: User },
-  { label: 'Settings', icon: Settings },
+  // { label: 'Profile', icon: User },
+  // { label: 'Settings', icon: Settings },
 ]
 
 export default function Home() {

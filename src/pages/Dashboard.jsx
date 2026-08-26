@@ -35,19 +35,25 @@ import MostPopular from '../components/dashboard/MostPopular';
 import NewReleases from '../components/dashboard/NewReleases';
 import AITrends from '../components/dashboard/AITrends';
 import RisingCategories from '../components/dashboard/RisingCategories'
+import LatestNews from '../components/dashboard/LatestNews';
+
 
 const sidebarItems = [
   { label: 'Home', icon: Home, path: '/' },
-  { label: 'Trending', icon: TrendingUp, path: '#' },
+  { label: 'Trending', icon: TrendingUp, path: '/trending' },
   { label: 'Agents', icon: Bot, path: '/agents' },
-  { label: 'Categories', icon: Layers, path: '#' },
-  { label: 'AI Trends', icon: Compass, path: '#' },
-  { label: 'News', icon: Newspaper, path: '#' },
-  { label: 'Saved', icon: Bookmark, path: '#' },
-  { label: 'Collections', icon: Heart, path: '#' },
-  { label: 'Community', icon: Users, path: '#' },
-  { label: 'Profile', icon: User, path: '#' },
-  { label: 'Settings', icon: Settings, path: '#' },
+  { label: 'Categories', icon: Layers, path: '/categories' },
+  { label: 'AI Trends', icon: Compass, path: '/ai-trends' },
+  { label: 'News', icon: Newspaper, path: '/news' },
+  { label: 'Saved', icon: Bookmark, path: '/saved' },
+  { label: 'Collections', icon: Heart, path: '/collections' },
+  { label: 'Community', icon: Users, path: '/community' },
+//   { label: 'Profile', icon: User, path: '/profile' },
+//  {
+//   label: 'Settings',
+//   icon: Settings,
+//   path: '/settings',
+// },
 ]
 
 // const recommendedAgents = [
@@ -100,6 +106,7 @@ export default function Dashboard() {
   const navigate = useNavigate()
 
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [profileOpen, setProfileOpen] = useState(false)
 
   const handleLogout = async () => {
     await logout()
@@ -263,16 +270,66 @@ export default function Dashboard() {
 
               </button>
 
-              <button
-                onClick={handleLogout}
-                className="hidden items-center gap-2 rounded-xl border border-white/10 px-3 py-2 text-sm text-slate-400 transition hover:bg-white/5 hover:text-white sm:flex"
-              >
-                <LogOut size={16} />
-                Logout
-              </button>
+              <div className="relative">
 
-              <div className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-purple-500 to-blue-500 text-sm font-bold">
-                {displayName.charAt(0).toUpperCase()}
+                <button
+                  type="button"
+                  onClick={() => setProfileOpen(!profileOpen)}
+                  className="flex h-9 w-9 items-center justify-center rounded-full bg-gradient-to-br from-purple-500 to-blue-500 text-sm font-bold transition hover:ring-2 hover:ring-purple-500/40"
+                  aria-label="Open profile menu"
+                >
+                  {displayName.charAt(0).toUpperCase()}
+                </button>
+
+                {profileOpen && (
+                  <div className="absolute right-0 top-12 z-50 w-56 overflow-hidden rounded-2xl border border-white/10 bg-[#0d1421] p-2 shadow-2xl shadow-black/40">
+
+                    {/* User info */}
+                    <div className="border-b border-white/10 px-3 py-3">
+
+                      <p className="truncate text-sm font-semibold text-white">
+                        {displayName}
+                      </p>
+
+                      <p className="mt-1 truncate text-xs text-slate-500">
+                        {user?.email}
+                      </p>
+
+                    </div>
+
+                    {/* Profile */}
+                    <Link
+                      to="/profile"
+                      onClick={() => setProfileOpen(false)}
+                      className="mt-2 flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-slate-300 transition hover:bg-white/5 hover:text-white"
+                    >
+                      <User size={17} />
+                      Profile
+                    </Link>
+
+                    {/* Settings */}
+                    <Link
+                      to="/settings"
+                      onClick={() => setProfileOpen(false)}
+                      className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-slate-300 transition hover:bg-white/5 hover:text-white"
+                    >
+                      <Settings size={17} />
+                      Settings
+                    </Link>
+
+                    {/* Logout */}
+                    <button
+                      type="button"
+                      onClick={handleLogout}
+                      className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-red-400 transition hover:bg-red-500/10"
+                    >
+                      <LogOut size={17} />
+                      Logout
+                    </button>
+
+                  </div>
+                )}
+
               </div>
 
             </div>
@@ -322,10 +379,13 @@ export default function Dashboard() {
                     <ArrowUpRight size={17} />
                   </Link>
 
-                  <button className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-slate-300 transition hover:bg-white/10">
+                  <Link
+                    to="/saved"
+                    className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-slate-300 transition hover:bg-white/10"
+                  >
                     <Bookmark size={16} />
                     Saved Agents
-                  </button>
+                  </Link>
 
                 </div>
 
@@ -448,6 +508,7 @@ export default function Dashboard() {
           <NewReleases />
           <AITrends />
           <RisingCategories />
+          <LatestNews />
 
           {/* Trends */}
           <section className="mt-10">
