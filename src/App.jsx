@@ -19,6 +19,7 @@ import News from './pages/News'
 import Collections from './pages/Collections'
 import Profile from './pages/Profile'
 import Settings from './pages/Settings'
+import ProtectedRoute from './components/ProtectedRoute'
 
 function App() {
   return (
@@ -28,47 +29,94 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/agents" element={<Agents />} />
+        <Route
+          path="/agents"
+          element={
+            <ProtectedRoute>
+              <Agents />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="/agents/:id"
-          element={<AgentDetails />}
+          element={
+            <ProtectedRoute>
+              <AgentDetails />
+            </ProtectedRoute>
+          }
         />
         <Route
           path="/saved"
-          element={<SavedAgents />}
+          element={
+            <ProtectedRoute>
+              <SavedAgents />
+            </ProtectedRoute>
+          }
         />
         <Route
           path="/onboarding"
-          element={<Onboarding />}
+          element={
+            <ProtectedRoute>
+              <Onboarding />
+            </ProtectedRoute>
+          }
         />
         <Route
           path="/trending"
-          element={<Trending />}
+          element={
+            <ProtectedRoute>
+              <Trending />
+            </ProtectedRoute>
+          }
         />
         <Route
           path="/categories"
-          element={<Categories />}
+          element={
+            <ProtectedRoute>
+              <Categories />
+            </ProtectedRoute>
+          }
         />
         <Route
           path="/ai-trends"
-          element={<AITrends />}
+          element={
+            <ProtectedRoute>
+              <AITrends />
+            </ProtectedRoute>
+          }
         />
         <Route
           path="/news"
-          element={<News />}
+          element={
+            <ProtectedRoute>
+              <News />
+            </ProtectedRoute>
+          }
         />
         <Route
           path="/collections"
-          element={<Collections />}
+          element={
+            <ProtectedRoute>
+              <Collections />
+            </ProtectedRoute>
+          }
         />
         <Route
           path="/profile"
-          element={<Profile />}
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
         />
 
         <Route
           path="/settings"
-          element={<Settings />}
+          element={
+            <ProtectedRoute>
+              <Settings />
+            </ProtectedRoute>
+          }
         />
       </Routes>
     </BrowserRouter>

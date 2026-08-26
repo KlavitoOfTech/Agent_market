@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
 import {
   Bot,
   TrendingUp,
@@ -114,6 +115,7 @@ const sidebarItems = [
 
 export default function Home() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const { user } = useAuth()
 
   return (
     <div className="min-h-screen bg-[#070b14] text-white">
@@ -289,7 +291,7 @@ export default function Home() {
                 <div className="mt-7 flex flex-wrap gap-3">
 
                   <Link
-                    to="/agents"
+                    to={user ? '/agents' : '/login'}
                     className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-purple-600 to-blue-600 px-5 py-3 text-sm font-semibold shadow-lg shadow-purple-900/20 transition hover:scale-[1.02] hover:from-purple-500 hover:to-blue-500"
                   >
                     Explore Agents
@@ -297,7 +299,7 @@ export default function Home() {
                   </Link>
 
                   <Link
-                    to="/trends"
+                    to={user ? '/trends' : '/login'}
                     className="inline-flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-5 py-3 text-sm font-semibold text-slate-200 transition hover:bg-white/10"
                   >
                     View Trends
