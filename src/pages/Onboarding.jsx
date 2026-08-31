@@ -100,6 +100,7 @@ export default function Onboarding() {
       .from('profiles')
       .update({
         interests: selected,
+        onboarding_completed: true,
       })
       .eq('id', user.id)
 

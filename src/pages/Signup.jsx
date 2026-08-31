@@ -50,7 +50,7 @@ export default function Signup() {
       return
     }
 
-    navigate('/dashboard')
+    navigate('/onboarding')
   }
 
   return (
